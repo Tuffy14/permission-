@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eat Out Permission</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 80vh;
+            background: url('https://wallpapercave.com/wp/wp4766538.jpg'), #e99f9f;
+            background-size: cover;
+        }
+        .message {
+            margin-bottom: 86px;
+            font-size: 40px;
+            color: #ffffff;
+        }
+        .buttons {
+            display: flex;
+            gap: 30px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: 2px solid #888;
+            border-radius: 5px;
+            background-color: #ffe9f0;
+            transition: transform 0.2s;
+        }
+        .buttons button:hover {
+            transform: scale(1.1);
+        }
+        #catImage {
+            margin-top: 20px;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 2px solid #888;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="message">Would you like to eat out with me?</div>
+    <div class="buttons">
+        <button id="yesButton">Yes</button>
+        <button id="noButton">No</button>
+    </div>
+    <img id="catImage" src="" alt="Funny Cat">
+
+    <script>
+        let noClickCount = 0;
+        const noButton = document.getElementById('noButton');
+        const messageDiv = document.querySelector('.message');
+        const yesButton = document.getElementById('yesButton');
+        const catImage = document.getElementById('catImage');
+
+        const catImages = [
+            'https://i.pinimg.com/736x/23/b3/09/23b309cc90607f6ac70ff5af6ddcf7a7.jpg',
+            'https://sayingimages.com/wp-content/uploads/the-standing-cat-please-meme.jpg',
+            'https://i.imgflip.com/2/64ngzd.jpg'
+        ];
+
+        noButton.addEventListener('click', () => {
+            noClickCount++;
+            if (noClickCount === 1) {
+                messageDiv.innerText = "You don't want to eat with me?";
+                catImage.src = catImages[0];
+                catImage.style.display = 'block';
+            } else if (noClickCount === 2) {
+                messageDiv.innerText = "Are you sure? Please say yes!";
+                catImage.src = catImages[1];
+                catImage.style.display = 'block';
+            } else if (noClickCount === 3) {
+                messageDiv.innerText = "Let's see how you can say no.";
+                catImage.src = catImages[2];
+                catImage.style.display = 'block';
+                moveNoButton();
+            }
+        });
+
+
+       
+        <!-- when clicked yes it will show this -->
+        yesButton.addEventListener('click', () => {
+            messageDiv.innerText = "Yayyy! I knew you'd say yes!!!";
+            catImage.src = 'https://i.ytimg.com/vi/_AFElOvO8oI/maxresdefault.jpg?sqp=-oaymwEmCIAKENAF8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGGUgUShTMA8=&rs=AOn4CLAcBYwIPAfuwHShDuo_Knb8JWh-EA';
+            noButton.style.display = 'none';
+            yesButton.style.display = 'none';
+            catImage.style.display = 'block';
+        });
+
+        function moveNoButton() {
+            noButton.style.position = 'absolute';
+            noButton.addEventListener('mouseover', () => {
+                const randomX = Math.floor(Math.random() * window.innerWidth);
+                const randomY = Math.floor(Math.random() * window.innerHeight);
+                noButton.style.left = `${randomX}px`;
+                noButton.style.top = `${randomY}px`;
+            });
+        }
+    </script>
+</body>
+</html>
